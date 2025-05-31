@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liska Kat - Помощь животным</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23FFD43B' d='M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5l0 1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3l0-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z'/></svg>">
+    <style>
+        :root {
+            --header-height: 100px;
+            --dark-bg: #1A1A1A;
+            --darker-bg: #121212;
+            --accent: #FFBE1A;
+            --dark-text: #F0F0F0;
+            --menu-bg: #1A1A1A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--dark-bg);
+            padding-top: 80px;
+        }
+
+        p {
+            text-indent: 1em;
+            margin-bottom: 7px;
+            text-align: justify
+        }
+
+        /*header {*/
+        /*  height: var(--header-height);*/
+        /*  position: fixed;*/
+        /*  top: 0;*/
+        /*  left: 0;*/
+        /*  width: 100%;*/
+        /*  padding: 1rem;*/
+        /*  background-color: var(--darker-bg);*/
+        /*  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);*/
+        /*  z-index: 1001;*/
+        /*  isolation: isolate;*/
+        /*}*/
+
+        .header {
+            height: var(--header-height);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--darker-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            isolation: isolate;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .header-contacts a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.3rem 0.5rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .header-contacts a:hover {
+            color: var(--accent);
+            background-color: rgba(255, 190, 26, 0.1);
+        }
+
+        .burger-menu {
+            background: none;
+            border: none;
+            color: var(--dark-text);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            background-color: transparent;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            top: var(--header-height);
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            background-color: rgba(255, 190, 26, 0.1);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: var(--darker-bg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-out forwards;
+            scroll-margin-top: 80px;
+        }
+
+        h1, h2, h3 {
+            color: var(--accent);
+            margin-bottom: 7px;
+        }
+
+        p.no-margin-bottom {
+            text-indent: initial;
+            margin-bottom: initial;
+            text-align: center;
+        }
+
+        p.highlight {
+            color: var(--accent);
+            font-weight: bold;
+            text-align: initial;
+            text-indent: initial;
+        }
+
+        #about {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: start;
+        }
+
+        #about img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-content {
+            max-width: 800px;
+            position: relative;
+        }
+
+        .text-collapse {
+            position: relative;
+            max-height: 120px;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-collapse::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(26, 26, 26, 0), var(--darker-bg));
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-collapse.expanded {
+            max-height: 2000px;
+        }
+
+        .text-collapse.expanded::after {
+            opacity: 0;
+        }
+
+        .toggle-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .toggle-text {
+            color: var(--accent);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .toggle-text:hover {
+            background-color: rgba(255, 190, 26, 0.1);
+        }
+
+        .toggle-text i {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toggle-text.expanded i {
+            transform: rotate(180deg);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        ul li {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.5rem;
+            position: absolute;
+            left: -1.2rem;
+            top: -0.3rem;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .bank-card {
+            width: 350px;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 190, 26, 0.2);
+        }
+
+        .bank-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 65%, rgba(255, 190, 26, 0.1));
+            z-index: 0;
+        }
+
+        .copy-field {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .copy-field label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--dark-text);
+            opacity: 0.7;
+            margin-bottom: 0.3rem;
+        }
+
+        .copy-content {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copy-content:hover {
+            background-color: rgba(255, 190, 26, 0.2);
+            border-color: rgba(255, 190, 26, 0.3);
+        }
+
+        .copy-text {
+            flex-grow: 1;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            padding-right: 20px;
+            mask-image: linear-gradient(to right, black 80%, transparent 100%);
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent);
+            color: var(--darker-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1001;
+        }
+
+        .contacts-section {
+            background-color: var(--darker-bg);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .contacts-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 1rem;
+        }
+
+        .contacts-container a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .contacts-container a:hover {
+            background-color: rgba(255, 190, 26, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--darker-bg);
+            color: var(--dark-text);
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            opacity: 0;
+        }
+
+        section.visible {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+
+            .header-container {
+                flex-wrap: wrap;
+            }
+
+            .header-contacts {
+                order: 1;
+                width: calc(100% - 60px);
+            }
+
+            .burger-menu {
+                order: 2;
+            }
+
+            nav {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: var(--menu-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            #about img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .contacts-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .burger-menu {
+                color: var(--darker-bg); /* Скрываем бургер на широких экранах */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bank-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header">
+        <div class="header-container">
+            <div class="header-contacts">
+                <a href="#" id="phone-link">
+                    <i class="fas fa-phone"></i> +375 (29) 123-45-67
+                </a>
+                <a href="https://instagram.com/liska_kat" target="_blank">
+                    <i class="fab fa-instagram"></i> @liska_kat
+                </a>
+            </div>
+            <button class="burger-menu" id="burgerBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="headerMainNav">
+                <a href="#about">О нас</a>
+                <a href="#needs">Что нужно</a>
+                <a href="#help">Как помочь</a>
+                <a href="#details">Реквизиты</a>
+            </nav>
+        </div>
+    </div>
+    <nav id="mainNav">
+        <a href="#about">О нас</a>
+        <a href="#needs">Что нужно</a>
+        <a href="#help">Как помочь</a>
+        <a href="#details">Реквизиты</a>
+    </nav>
+</header>
+
+<main>
+    <section id="about" class="visible">
+        <img src="https://scontent-waw2-2.cdninstagram.com/v/t39.30808-6/468092030_18004352738702033_8056943312355871148_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDB4MTgwMC5zZHIuZjMwODA4LmRlZmF1bHRfaW1hZ2UifQ&_nc_ht=scontent-waw2-2.cdninstagram.com&_nc_cat=105&_nc_oc=Q6cZ2QEahzdKp2mtwxseI_7OyA6ocIiM07TwgKsRs7xsnZQsAA1L-d3dcW2A6f3DAGwqJ5I&_nc_ohc=0OtF6jCdd8wQ7kNvwEuJHG1&_nc_gid=fSUtNfLUqP6z1R1HUDisXg&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=MzE2ODQyMzMyMjA2NDUxNTc0NA%3D%3D.3-ccb7-5&oh=00_AfKkHQwUuBgXqsV7-7zenzkfSQcKK9__x7SSWqNDzXjadA&oe=6840089E&_nc_sid=10d13b" alt="Основатель Liska Kat">
+        <div class="text-content">
+            <h1>Кто я</h1>
+            <div class="text-collapse" id="aboutText">
+                <p class="highlight">Спасти, вылечить, найти дом</p>
+                <p>‌Привет, я Виктория - фанат кошачьих душ, которые считают помойки «вселенскими курортами», а ржавые трубы - элитными пентхаусами. Коктейль из слез, смеха и вечного запаха паштета в кармане - часть моей волонтерской жизни. И если не смеяться над абсурдом, можно сойти с ума.</p>
+                <p>Вселенная решила, что моя миссия спасать ушастых, хвостатых и прочих «неудобных» жителей асфальтных джунглей.
+                    Каждое утро начинается с разбора директа, звонка или сообщения: "Нашли котенка в подвале, ему плохо" или «Кошка с травмой сидит у дороги». Так начинается день человека, чья жизнь посвящена спасению тех, кого многие не замечают.</p>
+                <p>Спасение требует терпения: иногда приходится часами уговаривать испуганного котенка выйти из-под машины или осторожно снимать с дерева, где тот застрял от страха, жать сутками пока дикая кошка зайдет в котоловку.</p>
+                <p>После спасения - дорога в клинику. Переломы, инфекции, истощение... Ветеринары становятся союзниками в этой борьбе за жизнь. А потом - долгие дни ухода: обработка ран, капельницы. Иногда кошки боятся прикосновений, шипят, царапаются. Постепенно, через ласку и еду, рождается доверие. Самый трогательный момент - первый раз, когда измученный котенок мурлычет у тебя на коленях.</p>
+                <p class="highlight">Мое медикофилософское заключение</p>
+                <ul>
+                    <li>Диагноз "никому не нужен" лечится так: "ты теперь мой долг на три жизни вперёд. И да, я банкрот".</li>
+                    <li>Глисты? Просто «внутренние питомцы», едят за двоих. Выгоняем строго до пятницы.</li>
+                </ul>
+                <p class="highlight">Мой трофеи</p>
+                <ul>
+                    <li>Блошиные диджеи (чешутся в ритме техно)</li>
+                    <li>Философы с лишаём (лысина - повод для свитера с оленями)</li>
+                    <li>Глазные пессимисты (конъюнктивит от слёз по бывшим хозяевам)</li>
+                </ul>
+                <p class="highlight">Финальный аккорд</p>
+                <p>Поиск дома - этап, где важна каждая деталь. Переписка, проверка будущих хозяев, волнение: примут ли, полюбят ли? Радость усыновления смешивается с грустью расставания. Но вечером, вспоминая глаза спасенных, понимаешь - это не просто помощь. Это шанс подарить жизнь. Волонтерство - тихая война за тех, кто не может попросить сам. И каждая победа в ней бесценна.</p>
+                <p class="highlight">Вы тоже можете помочь!</p>
+                <p>Каждое пожертвование - это лекарство для раненых, корм для голодных, шанс на дом для беззащитных. Даже небольшая сумма спасает жизни. Поддержите нас, и вместе мы подарим ещё больше надежды для хвостов. Спасибо, что делаете мир добрее.</p>
+            </div>
+            <div class="toggle-container">
+                <button class="toggle-text" id="toggleText">
+                    <i class="fas fa-angle-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="needs">
+        <h2>Что нам нужно</h2>
+        <p>Наши нужды вполне очевидны и банальны:</p>
+        <ul>
+            <li>Корм (не вискас,фрискес, китикет)</li>
+            <li>Наполнитель комкующийся</li>
+            <li>Средства для обработки от паразитов и вакцины</li>
+            <li>Игрушки, лотки, миски</li>
+            <li>Финансовая помощь на оплату</li>
+        </ul>
+        <p>Поддержка, нужна ВСЕГДА! Каждая пачка корма, каждый мешочек наполнителя, каждая копеечка - это неоценимый, а главное очень нужный вклад в дело!</p>
+        <p>Так что, не нужно ждать подходящего момента, чтобы помочь. Если Вы захотите сделать доброе дело, не глушите в себе этот порыв!! Помощь никогда не бывает не уместной!</p>
+    </section>
+
+    <section id="help">
+        <h2>Чем еще можно помочь</h2>
+        <ul>
+            <li>Временная передержка</li>
+            <li>Помощь фотографа</li>
+            <li>Автопомощь</li>
+            <li>Ваши репосты</li>
+        </ul>
+    </section>
+
+    <section id="details">
+        <h2>Реквизиты для помощи</h2>
+        <p>Вы можете помочь финансово, используя следующие реквизиты:</p>
+
+        <div class="cards-container">
+            <div class="bank-card">
+                <h3>Для жителей РБ</h3>
+                <div class="copy-field">
+                    <label>Номер карты</label>
+                    <div class="copy-content">
+                        <span class="copy-text">4255 1901 5365 7377</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="copy-field">
+                    <label>IBAN</label>
+                    <div class="copy-content">
+                        <span class="copy-text">BY45AKBB30140020323780070000</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="copy-field">
+                    <label>Срок действия</label>
+                    <div class="copy-content">
+                        <span class="copy-text">03/26</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="copy-field">
+                    <label>Имя владельца</label>
+                    <div class="copy-content">
+                        <span class="copy-text">VIKTORYIA SIAMESHKA</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bank-card">
+                <h3>Для жителей РФ</h3>
+                <div class="copy-field">
+                    <label>Номер карты</label>
+                    <div class="copy-content">
+                        <span class="copy-text">9112 3801 6663 1301</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="copy-field">
+                    <label>IBAN</label>
+                    <div class="copy-content">
+                        <span class="copy-text">BY82AKBB30140002262645110000</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="copy-field">
+                    <label>Срок действия</label>
+                    <div class="copy-content">
+                        <span class="copy-text">09/28</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="copy-field">
+                    <label>Имя владельца</label>
+                    <div class="copy-content">
+                        <span class="copy-text"> VIKTORYIA SIAMESHKA</span>
+                        <button class="copy-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacts-section">
+        <h2>Контакты</h2>
+        <div class="contacts-container">
+            <a href="#" id="footer-phone-link">
+                <i class="fas fa-phone"></i> +375 (29) 123-45-67
+            </a>
+            <a href="https://instagram.com/liska_kat" target="_blank">
+                <i class="fab fa-instagram"></i> @liska_kat
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p class="no-margin-bottom">© 2025 Liska Kat. Все права защищены.</p>
+    <p class="no-margin-bottom">С любовью к животным</p>
+</footer>
+
+<div class="copy-notification" id="copyNotification">
+    Скопировано в буфер обмена!
+</div>
+
+<script>
+    // Бургер-меню
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    burgerBtn.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+        burgerBtn.innerHTML = mainNav.classList.contains('active')
+            ? '<i class="fas fa-times"></i>'
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                mainNav.classList.remove('active');
+                burgerBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    });
+
+    // Копирование реквизитов
+    document.querySelectorAll('.copy-content').forEach(item => {
+        item.addEventListener('click', function() {
+            const textToCopy = this.querySelector('.copy-text').textContent;
+            navigator.clipboard.writeText(textToCopy.trim()).then(() => {
+                showCopyNotification();
+            });
+        });
+    });
+
+    // Копирование телефона
+    const phoneLinks = document.querySelectorAll('#phone-link, #footer-phone-link');
+    phoneLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const phoneNumber = this.textContent.trim();
+
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
+            } else {
+                navigator.clipboard.writeText(phoneNumber).then(() => {
+                    showCopyNotification();
+                });
+            }
+        });
+    });
+
+    function showCopyNotification() {
+        const notification = document.getElementById('copyNotification');
+        notification.style.opacity = '1';
+        setTimeout(() => {
+            notification.style.opacity = '0';
+        }, 2000);
+    }
+
+    // Плавная прокрутка с учетом хедера
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Анимация появления секций при скролле
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Синхронная анимация раскрытия текста
+    const aboutText = document.getElementById('aboutText');
+    const toggleText = document.getElementById('toggleText');
+
+    toggleText.addEventListener('click', function() {
+        aboutText.classList.toggle('expanded');
+        this.classList.toggle('expanded');
+    });
+
+    // Скрытие бургер-меню на широких экранах
+    function handleBurgerVisibility() {
+        const burgerBtn = document.getElementById('burgerBtn');
+        if (window.innerWidth > 768) {
+            burgerBtn.style.color = 'var(--darker-bg)';
+        } else {
+            burgerBtn.style.color = 'var(--dark-text)';
+        }
+    }
+
+    // Инициализация и обработчик изменения размера
+    window.addEventListener('load', handleBurgerVisibility);
+    window.addEventListener('resize', handleBurgerVisibility);
+</script>
+</body>
+</html>
