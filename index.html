@@ -467,6 +467,10 @@
             .burger-menu {
                 color: var(--darker-bg); /* Скрываем бургер на широких экранах */
             }
+
+            .menuNav {
+                visibility: hidden;
+            }
         }
 
         @media (max-width: 480px) {
@@ -499,7 +503,7 @@
             </nav>
         </div>
     </div>
-    <nav id="mainNav">
+    <nav class="menuNav" id="mainNav">
         <a href="#about">О нас</a>
         <a href="#needs">Что нужно</a>
         <a href="#help">Как помочь</a>
